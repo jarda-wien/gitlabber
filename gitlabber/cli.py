@@ -1,4 +1,4 @@
-
+import getpass
 import os
 import sys
 import logging
@@ -22,8 +22,10 @@ def main():
         sys.exit(0) 
 
     if args.token is None:
-        print('Please specify a valid token with the -t flag or the \'GITLAB_TOKEN\' environment variable')
-        sys.exit(1)
+        args.token =  getpass.getpass(prompt='Gitlab API token: ')
+        if not args.token:
+            print('Please specify a valid token with the -t flag or the \'GITLAB_TOKEN\' environment variable')
+            sys.exit(1)
 
     if args.url is None:
         print('Please specify a valid gitlab base url with the -u flag or the \'GITLAB_URL\' environment variable')
